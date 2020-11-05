@@ -76,7 +76,7 @@ function blob_fixup() {
 
     # Change soname for fingerprint.default.so
     vendor/lib/hw/fingerprint.lito.so | vendor/lib64/hw/fingerprint.lito.so)
-        patchelf --set-soname "fingerprint.lito.so" "${2}"
+        "${PATCHELF}" --set-soname "fingerprint.lito.so" "${2}"
         ;;
 
     vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so)
