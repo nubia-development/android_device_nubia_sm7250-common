@@ -122,8 +122,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1 \
-    persist.vendor.camera.privapp.list=org.codeaurora.snapcam,org.lineageos.aperture \
-    vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.lineageos.aperture
+    persist.vendor.camera.privapp.list=org.codeaurora.snapcam,org.lineageos.aperture
 
 # Chipset
 PRODUCT_PROPERTY_OVERRIDES += \
