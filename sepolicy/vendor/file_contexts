@@ -1,3 +1,6 @@
+# Executables
+/(vendor|system/vendor)/bin/charger_led				u:object_r:charger_led_exec:s0
+
 # Fingerprint
 /dev/goodix_fp                                u:object_r:fingerprint_device:s0
 /data/vendor/goodix(/.*)?                     u:object_r:fingerprint_vendor_data_file:s0

@@ -98,6 +98,11 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.camera.device@1.0.vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
 
+# Charger
+PRODUCT_PACKAGES += \
+    charger_led \
+    charger_led.recovery
+
 # config.fs
 PRODUCT_PACKAGES += \
     fs_config_files
