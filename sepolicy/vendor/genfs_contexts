@@ -2,12 +2,6 @@
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8150b@2:neo,battery/power_supply u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/soc/884000.i2c/i2c-6/6-0057/power_supply u:object_r:sysfs_batteryinfo:s0
 
-# Fan node
-genfscon sysfs /kernel/fan u:object_r:sysfs_fan:s0
-
-# Leds
-genfscon sysfs /devices/platform/soc/994000.i2c/i2c-3/3-006a/leds/aw22xxx_led/trigger u:object_r:sysfs_leds:s0
-
 # Light sensor
 genfscon sysfs /class/light/light u:object_r:vendor_sysfs_sensors:s0
 genfscon sysfs /devices/virtual/light/light u:object_r:vendor_sysfs_sensors:s0
