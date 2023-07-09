@@ -206,11 +206,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.vendor.data.mode=concurrent \
     ro.vendor.use_data_netmgrd=true \
 
-# NFC
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.factory.nfc=true \
-    ro.boot.product.hardware.sku=nfc
-
 # OEM unlocking
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
