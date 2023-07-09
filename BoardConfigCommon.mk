@@ -105,7 +105,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # DT2W
-TARGET_TAP_TO_WAKE_NODE := "/sys/kernel/tp_node/wake_gesture"
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/wake_gesture"
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
