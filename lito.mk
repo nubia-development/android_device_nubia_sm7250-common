@@ -257,6 +257,7 @@ PRODUCT_PACKAGES += \
     NubiaLineageSettings \
     NubiaLineageSystemUI \
     NubiaSettings \
+    NubiaSettingsProvider \
     NubiaSystemUI \
     NubiaTelecomm \
     NubiaTelephony
