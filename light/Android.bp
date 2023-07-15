@@ -5,10 +5,10 @@
 //
 
 cc_binary {
-    name: "android.hardware.lights-service.nx659j",
+    name: "android.hardware.lights-service.nubia_sm7250",
     relative_install_path: "hw",
-    init_rc: ["android.hardware.lights-service.nx659j.rc"],
-    vintf_fragments: ["android.hardware.lights-service.nx659j.xml"],
+    init_rc: ["android.hardware.lights-service.nubia_sm7250.rc"],
+    vintf_fragments: ["android.hardware.lights-service.nubia_sm7250.xml"],
     vendor: true,
     shared_libs: [
         "libbase",

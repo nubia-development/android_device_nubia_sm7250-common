@@ -21,7 +21,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Inherit proprietary libraries
-$(call inherit-product, vendor/nubia/nx659j/nx659j-vendor.mk)
+$(call inherit-product, vendor/nubia/sm7250-common/sm7250-common-vendor.mk)
 
 # Inherit display makefiles
 $(call inherit-product, hardware/qcom-caf/sm8250/display/config/display-board.mk)
@@ -47,7 +47,7 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     android.hardware.soundtrigger@2.3-impl \
     audio.bluetooth.default \
-    audio.primary.kona \
+    audio.primary.lito \
     audio.r_submix.default \
     audio.usb.default \
     liba2dpoffload \
@@ -113,14 +113,14 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    gralloc.kona \
+    gralloc.lito \
     libdisplayconfig.qti \
     libdisplayconfig.system.qti \
     libqdMetaData \
     libqdMetaData.system \
     libsdmcore \
     libsdmutils \
-    memtrack.kona \
+    memtrack.lito \
     libtinyxml \
     libvulkan \
     vendor.display.config@1.9.vendor \
@@ -145,11 +145,11 @@ PRODUCT_PACKAGES += \
 
 # fastbootd
 PRODUCT_PACKAGES += \
-    fastbootd.nx659j
+    fastbootd.nubia_sm7250
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.nx659j
+    android.hardware.biometrics.fingerprint@2.3-service.nubia_sm7250
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
@@ -200,7 +200,7 @@ PRODUCT_PACKAGES += \
 
 # Light
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.nx659j
+    android.hardware.lights-service.nubia_sm7250
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
@@ -248,7 +248,7 @@ PRODUCT_PACKAGES += \
 
 # Namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    device/nubia/nx659j \
+    device/nubia/sm7250-common \
     vendor/qcom/opensource/usb/etc
 
 # NFC
@@ -406,7 +406,7 @@ PRODUCT_COPY_FILES += \
 
 # Touch
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.nx659j
+    vendor.lineage.touch@1.0-service.nubia_sm7250
 
 # Trustzone
 PRODUCT_PACKAGES += \
@@ -427,7 +427,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.nx659j
+    vendor.qti.hardware.vibrator.service.nubia_sm7250
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/excluded-input-devices.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/excluded-input-devices.xml

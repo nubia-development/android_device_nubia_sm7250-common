@@ -1,5 +1,5 @@
 cc_binary {
-    name: "fastbootd.nx659j",
+    name: "fastbootd.nubia_sm7250",
     defaults: ["fastboot_defaults"],
 
     recovery: true,

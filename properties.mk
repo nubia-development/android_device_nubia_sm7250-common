@@ -126,8 +126,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Chipset
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.soc.manufacturer=QTI \
-    ro.soc.model=SM8250
+    ro.soc.manufacturer=Qualcomm \
+    ro.soc.model=SM7250
 
 # CNE
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
