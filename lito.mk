@@ -33,6 +33,7 @@ PRODUCT_SHIPPING_API_LEVEL := 29
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
 # ANT+
@@ -246,21 +247,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     device/nubia/sm7250-common \
     vendor/qcom/opensource/usb/etc
-
-# Overlays
-PRODUCT_PACKAGES += \
-    NubiaBluetooth \
-    NubiaCarrierConfig \
-    NubiaCellBroadcastReceiver \
-    NubiaFrameworks \
-    NubiaLineageAperture \
-    NubiaLineageSettings \
-    NubiaLineageSystemUI \
-    NubiaSettings \
-    NubiaSettingsProvider \
-    NubiaSystemUI \
-    NubiaTelecomm \
-    NubiaTelephony
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
