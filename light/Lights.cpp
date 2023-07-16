@@ -18,6 +18,7 @@
 #define LED_DELAY_ON        "delay_on"
 #define LED_DELAY_OFF       "delay_off"
 #define LED_MAX_BRIGHTNESS  "max_brightness"
+#define LED_BREATH_FEATURE  "breath_feature"
 
 #define BATTERY_CAPACITY          "/sys/class/power_supply/battery/capacity"
 #define BATTERY_STATUS_FILE       "/sys/class/power_supply/battery/status"
@@ -32,6 +33,10 @@
 #define BACK_STRIP_NOTIFICATION      2
 #define BACK_STRIP_BATTERY_CHARGING  8
 #define BACK_STRIP_BATTERY_FULL      11
+
+#define BACK_LOGO_LED_OFF            0
+#define BACK_LOGO_LED_ON             "1 1000 0 700 0 255 3"
+#define BACK_LOGO_LED_BREATH         "3 1000 0 700 0 255 3"
 
 enum battery_status {
     BATTERY_UNKNOWN = 0,
@@ -137,6 +142,7 @@ static void handleNotification(const HwLightState& state) {
         case FlashMode::HARDWARE:
             if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
                 set(BACK_STRIP EFFECT_FILE, BACK_STRIP_NOTIFICATION);
+                set(BLUE_LED LED_BREATH_FEATURE, BACK_LOGO_LED_BREATH);
             }
             /* Enable breathing */
             if (!!red)
@@ -151,6 +157,7 @@ static void handleNotification(const HwLightState& state) {
         case FlashMode::TIMED:
             if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
                 set(BACK_STRIP EFFECT_FILE, BACK_STRIP_NOTIFICATION);
+                set(BLUE_LED LED_BREATH_FEATURE, BACK_LOGO_LED_BREATH);
             }
             /* Enable blinking */
             if (!!red)
@@ -174,6 +181,7 @@ static void handleNotification(const HwLightState& state) {
                 set(RED_LED LED_BRIGHTNESS, red);
                 if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
                     set(BACK_STRIP EFFECT_FILE, BACK_STRIP_BATTERY_CHARGING);
+                    set(BLUE_LED LED_BREATH_FEATURE, BACK_LOGO_LED_ON);
                 }
             } else if (battery_state == BATTERY_FULL) {
                 set(RED_LED LED_BRIGHTNESS, 0);
@@ -181,6 +189,7 @@ static void handleNotification(const HwLightState& state) {
                 set(GREEN_LED LED_BRIGHTNESS, green);
                 if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
                     set(BACK_STRIP EFFECT_FILE, BACK_STRIP_BATTERY_FULL);
+                    set(BLUE_LED LED_BREATH_FEATURE, BACK_LOGO_LED_ON);
                 }
             } else if (battery_state == BATTERY_FREE) {
                 set(RED_LED LED_BRIGHTNESS, 0);
@@ -188,6 +197,7 @@ static void handleNotification(const HwLightState& state) {
                 set(BLUE_LED LED_BRIGHTNESS, 0);
                 if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
                     set(BACK_STRIP EFFECT_FILE, BACK_STRIP_OFF);
+                    set(BLUE_LED LED_BREATH_FEATURE, BACK_LOGO_LED_OFF);
                 }
             }
             break;
