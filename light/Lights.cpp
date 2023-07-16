@@ -26,6 +26,13 @@
 #define BATTERY_STATUS_DISCHARGING  "Discharging"
 #define BATTERY_STATUS_FULL         "Full"
 
+#define BACK_STRIP                  "/sys/class/leds/aw22xxx_led/"
+#define EFFECT_FILE                 "effect"
+#define BACK_STRIP_OFF               0
+#define BACK_STRIP_NOTIFICATION      2
+#define BACK_STRIP_BATTERY_CHARGING  8
+#define BACK_STRIP_BATTERY_FULL      11
+
 enum battery_status {
     BATTERY_UNKNOWN = 0,
     BATTERY_LOW,
@@ -128,6 +135,9 @@ static void handleNotification(const HwLightState& state) {
 
     switch (state.flashMode) {
         case FlashMode::HARDWARE:
+            if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
+                set(BACK_STRIP EFFECT_FILE, BACK_STRIP_NOTIFICATION);
+            }
             /* Enable breathing */
             if (!!red)
                 set(RED_LED LED_BREATH, 1);
@@ -139,6 +149,9 @@ static void handleNotification(const HwLightState& state) {
                 set(BLUE_LED LED_BREATH, 1);
             break;
         case FlashMode::TIMED:
+            if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
+                set(BACK_STRIP EFFECT_FILE, BACK_STRIP_NOTIFICATION);
+            }
             /* Enable blinking */
             if (!!red)
                 set(RED_LED LED_DELAY_ON, state.flashOnMs);
@@ -159,14 +172,23 @@ static void handleNotification(const HwLightState& state) {
                 set(GREEN_LED LED_BRIGHTNESS, 0);
                 set(BLUE_LED LED_BRIGHTNESS, 0);
                 set(RED_LED LED_BRIGHTNESS, red);
+                if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
+                    set(BACK_STRIP EFFECT_FILE, BACK_STRIP_BATTERY_CHARGING);
+                }
             } else if (battery_state == BATTERY_FULL) {
                 set(RED_LED LED_BRIGHTNESS, 0);
                 set(BLUE_LED LED_BRIGHTNESS, 0);
                 set(GREEN_LED LED_BRIGHTNESS, green);
+                if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
+                    set(BACK_STRIP EFFECT_FILE, BACK_STRIP_BATTERY_FULL);
+                }
             } else if (battery_state == BATTERY_FREE) {
                 set(RED_LED LED_BRIGHTNESS, 0);
                 set(GREEN_LED LED_BRIGHTNESS, 0);
                 set(BLUE_LED LED_BRIGHTNESS, 0);
+                if (GetProperty("ro.product.vendor.device", "") == "NX651J-EEA") {
+                    set(BACK_STRIP EFFECT_FILE, BACK_STRIP_OFF);
+                }
             }
             break;
     }
