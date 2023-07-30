@@ -250,6 +250,7 @@ PRODUCT_PACKAGES += \
 # Namespaces
 PRODUCT_SOONG_NAMESPACES += \
     device/nubia/sm7250-common \
+    hardware/nubia \
     vendor/qcom/opensource/usb/etc
 
 # Partitions
