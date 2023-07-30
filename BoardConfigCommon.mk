@@ -72,7 +72,7 @@ endif
 BOARD_HAVE_BLUETOOTH_QCOM := true
 
 # Biometrics
-TARGET_SURFACEFLINGER_UDFPS_LIB := //$(COMMON_PATH):libudfps_extension.nubia_sm7250
+TARGET_SURFACEFLINGER_UDFPS_LIB := //hardware/nubia:libudfps_extension.nubia
 TARGET_USES_FOD_ZPOS := true
 
 # Bootloader
