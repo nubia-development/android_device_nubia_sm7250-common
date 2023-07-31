@@ -71,8 +71,8 @@ function blob_fixup() {
     case "${1}" in
 
     # Change soname for fingerprint.default.so
-    vendor/lib/hw/fingerprint.lito.so | vendor/lib64/hw/fingerprint.lito.so)
-        "${PATCHELF}" --set-soname "fingerprint.lito.so" "${2}"
+    vendor/lib/hw/fingerprint.goodix_fod.lito.so | vendor/lib64/hw/fingerprint.goodix_fod.lito.so)
+        "${PATCHELF}" --set-soname "fingerprint.goodix_fod.lito.so" "${2}"
         ;;
 
     vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so)
