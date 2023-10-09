@@ -148,7 +148,7 @@ PRODUCT_PACKAGES += \
 
 # fastbootd
 PRODUCT_PACKAGES += \
-    fastbootd.nubia_sm7250
+    fastbootd
 
 # Fingerprint
 PRODUCT_PACKAGES += \
