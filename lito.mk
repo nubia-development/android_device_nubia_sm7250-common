@@ -149,7 +149,8 @@ PRODUCT_PACKAGES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.3-service.nubia \
-    libudfpshandler
+    libudfpshandler \
+    libhidlbase_shim
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
