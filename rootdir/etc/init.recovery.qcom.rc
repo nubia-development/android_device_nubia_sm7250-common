@@ -36,17 +36,3 @@ on property:ro.boot.usbcontroller=*
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-service fastbootd.nubia_sm7250 /system/bin/fastbootd.nubia_sm7250
-    disabled
-    group system
-    seclabel u:r:fastbootd:s0
-
-on property:sys.usb.config=fastboot
-    start fastbootd.nubia_sm7250
-
-on property:sys.usb.config=none && property:sys.usb.configfs=0
-    stop fastbootd.nubia_sm7250
-
-on property:sys.usb.config=none && property:sys.usb.configfs=1
-    stop fastbootd.nubia_sm7250

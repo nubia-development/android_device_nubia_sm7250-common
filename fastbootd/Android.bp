@@ -1,5 +1,6 @@
 cc_binary {
     name: "fastbootd.nubia_sm7250",
+    stem: "fastbootd",
     defaults: ["fastboot_defaults"],
 
     recovery: true,
