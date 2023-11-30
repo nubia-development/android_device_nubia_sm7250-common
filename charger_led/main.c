@@ -37,7 +37,6 @@
 /* Definitions */
 enum led_types {
     LED_UNKNOWN = 0,
-    WHITE,
     RED,
     GREEN,
     BLUE,
@@ -51,28 +50,24 @@ enum led_types {
 enum led_states { LED_STATE_OFF = 0, LED_STATE_BREATH, LED_STATE_BRIGHTNESS };
 
 const char led_blink_paths[LED_STANDARD_TYPES_MAX][64] = {
-        [WHITE] = LED_PATH("white", "blink"),
         [RED] = LED_PATH("red", "blink"),
         [GREEN] = LED_PATH("green", "blink"),
         [BLUE] = LED_PATH("blue", "blink"),
 };
 
 const char led_breath_paths[LED_STANDARD_TYPES_MAX][64] = {
-        [WHITE] = LED_PATH("white", "breath"),
         [RED] = LED_PATH("red", "breath"),
         [GREEN] = LED_PATH("green", "breath"),
         [BLUE] = LED_PATH("blue", "breath"),
 };
 
 const char led_brightness_paths[LED_STANDARD_TYPES_MAX][64] = {
-        [WHITE] = LED_PATH("white", "brightness"),
         [RED] = LED_PATH("red", "brightness"),
         [GREEN] = LED_PATH("green", "brightness"),
         [BLUE] = LED_PATH("blue", "brightness"),
 };
 
 const char led_max_brightness_paths[LED_STANDARD_TYPES_MAX][64] = {
-        [WHITE] = LED_PATH("white", "max_brightness"),
         [RED] = LED_PATH("red", "max_brightness"),
         [GREEN] = LED_PATH("green", "max_brightness"),
         [BLUE] = LED_PATH("blue", "max_brightness"),
@@ -170,8 +165,6 @@ bool write_led_brightness(enum led_types led_id, int led_brightness) {
 
 const char* led_id_to_str(enum led_types led_id) {
     switch (led_id) {
-        case WHITE:
-            return "White";
         case RED:
             return "Red";
         case GREEN:
@@ -269,7 +262,6 @@ bool set_led_state(enum led_types led_id, enum led_states led_state) {
     bool succeed = false;
     switch (led_id) {
         // Standard colors
-        case WHITE:
         case RED:
         case GREEN:
         case BLUE:
@@ -358,22 +350,6 @@ void handle_battery_capacity_update_rgb(void) {
 #endif
 }
 
-void handle_battery_capacity_update_white(void) {
-#ifdef __ANDROID_RECOVERY__
-    if (bat_capacity <= 20)  // 0 ~ 20
-        update_led(active_led.id, LED_STATE_BREATH);
-    else if (bat_capacity <= 100)  // 21 ~ 100
-        update_led(active_led.id, LED_STATE_BRIGHTNESS);
-#else
-    if (bat_capacity <= 10)  // 0 ~ 10
-        update_led(active_led.id, LED_STATE_BREATH);
-    else if (bat_capacity <= 99)  // 11 ~ 99
-        update_led(active_led.id, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity == 100)  // 100
-        update_led(active_led.id, LED_STATE_BREATH);
-#endif
-}
-
 void (*handle_battery_capacity_update_callback)(void) = NULL;
 
 void handle_usb_current_max_update(void) {
@@ -397,20 +373,8 @@ bool detect_led_type(void) {
         handle_battery_capacity_update_callback = handle_battery_capacity_update_rgb;
         check_led_node = GREEN;
     } else {
-        // Either White color only LED, or nothing
-        handle_battery_capacity_update_callback = handle_battery_capacity_update_white;
-        if (file_is_writeable(led_brightness_paths[WHITE])) {
-            LOG_INFO("White LED is found, using white node\n");
-            active_led.id = WHITE;
-            check_led_node = WHITE;
-        } else if (file_is_writeable(led_brightness_paths[RED])) {
-            LOG_INFO("White LED is found, using red node\n");
-            active_led.id = RED;
-            check_led_node = RED;
-        } else {
-            LOG_ERROR("Could not find any LED\n");
+        LOG_ERROR("Could not find any LED\n");
             return false;
-        }
     }
 
     if (file_is_writeable(led_blink_paths[check_led_node])) {
