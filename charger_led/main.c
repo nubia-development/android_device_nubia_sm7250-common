@@ -41,9 +41,6 @@ enum led_types {
     GREEN,
     BLUE,
     LED_STANDARD_TYPES_MAX,
-    CYAN,    // blue+green
-    PINK,    // blue+red
-    YELLOW,  // green+red
     LED_ALL_TYPES_MAX
 };
 
@@ -171,12 +168,6 @@ const char* led_id_to_str(enum led_types led_id) {
             return "Green";
         case BLUE:
             return "Blue";
-        case CYAN:
-            return "Cyan";
-        case PINK:
-            return "Pink";
-        case YELLOW:
-            return "Yellow";
         default:
             return "Unknown";
     }
@@ -267,19 +258,6 @@ bool set_led_state(enum led_types led_id, enum led_states led_state) {
         case BLUE:
             succeed = set_led_state_standard_color(led_id, led_state);
             break;
-        // Mixed colors
-        case CYAN:
-            succeed = set_led_state_standard_color(BLUE, led_state);
-            succeed &= set_led_state_standard_color(GREEN, led_state);
-            break;
-        case PINK:
-            succeed = set_led_state_standard_color(BLUE, led_state);
-            succeed &= set_led_state_standard_color(RED, led_state);
-            break;
-        case YELLOW:
-            succeed = set_led_state_standard_color(GREEN, led_state);
-            succeed &= set_led_state_standard_color(RED, led_state);
-            break;
         default:
             succeed = false;
             break;
@@ -327,27 +305,10 @@ bool update_led(enum led_types led_id, enum led_states led_state) {
 void handle_battery_capacity_update_rgb(void) {
     if (bat_capacity <= 10)  // 0 ~ 10
         update_led(RED, LED_STATE_BREATH);
-    else if (bat_capacity <= 20)  // 11 ~ 20
+    else if (bat_capacity < 90)  // 11 ~ 89
         update_led(RED, LED_STATE_BRIGHTNESS);
-#ifdef __ANDROID_RECOVERY__
-    else if (bat_capacity <= 60)  // 21 ~ 60
-        update_led(CYAN, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity <= 100)  // 61 ~ 100
+    else if (bat_capacity <= 100)  // 90~100
         update_led(GREEN, LED_STATE_BRIGHTNESS);
-#else
-    else if (bat_capacity <= 30)  // 21 ~ 30
-        update_led(PINK, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity <= 50)  // 31 ~ 50
-        update_led(YELLOW, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity <= 70)  // 51 ~ 70
-        update_led(BLUE, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity <= 80)  // 71 ~ 80
-        update_led(CYAN, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity <= 99)  // 81 ~ 99
-        update_led(GREEN, LED_STATE_BRIGHTNESS);
-    else if (bat_capacity == 100)  // 100
-        update_led(GREEN, LED_STATE_BREATH);
-#endif
 }
 
 void (*handle_battery_capacity_update_callback)(void) = NULL;
