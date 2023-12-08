@@ -32,43 +32,6 @@ on boot
     chmod 0660 /sys/class/power_supply/battery/input_suspend
     chown system system /sys/class/power_supply/battery/input_suspend
 
-    # tp
-    mkdir /data/vendor/tp 0775 system system
-    mkdir /data/vendor/tp/debug 0775 system system
-
-    rm /data/vendor/tp/ic_ver
-    rm /data/vendor/tp/rawdata
-    rm /data/vendor/tp/delta
-    rm /data/vendor/tp/ic_detect
-    rm /data/vendor/tp/start_update
-    rm /data/vendor/tp/easy_sleep_palm
-    rm /data/vendor/tp/easy_wakeup_gesture
-
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/f54
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/ic_ver
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/gamemode
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/fpswitch
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/tptest
-
-    chown system system /sys/kernel/tp_node/fp_mode
-
-    chmod 664 /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/tptest
-
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/ic_ver /data/vendor/tp/ic_ver
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/f54/autotest
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/tptest /data/vendor/tp/ic_detect
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/start_update
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/start_update /data/vendor/tp/start_update
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/f54/rawdata
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/f54/rawdata /data/vendor/tp/rawdata
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/f54/delta
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/f54/delta /data/vendor/tp/delta
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/palm_sleep
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/palm_sleep /data/vendor/tp/easy_sleep_palm
-    chown system system /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/wake_gesture
-    symlink /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/wake_gesture /data/vendor/tp/easy_wakeup_gesture
-    write /sys/devices/platform/soc/984000.i2c/i2c-1/1-0020/input/input1/start_update 1
-
     # nubia multicolor led
     chown system system /sys/class/leds/aw22xxx_led/reg
     chown system system /sys/class/leds/aw22xxx_led/hwen
@@ -105,6 +68,8 @@ on post-fs-data
     # tp
     chmod 0666 /sys/kernel/tp_node/fp_mode
     chown system system /sys/kernel/tp_node/fp_mode
+    chown system system /sys/kernel/tp_node/wake_gesture
+    chmod 0664 /sys/kernel/tp_node/wake_gesture
 
     # charger
     chmod 664 /sys/kernel/nubia_charge/charger_bypass
